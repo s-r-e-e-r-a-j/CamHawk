@@ -5,10 +5,15 @@ CamHawk is a camera phishing tool that tricks users into granting webcam access 
 
 ##  Features
 ✔ Automatic Camera Access – No button clicks required.
+
 ✔ Real-time Photo Capture – Saves images instantly upon access.
+
 ✔ Serveo.net Port Forwarding – No manual setup needed.
+
 ✔ Live Terminal Updates – Displays "Photo Received!" when an image is captured.
+
 ✔ User-Friendly Bash Script – Easily start, stop, and manage the server.
+
 
 ##  Installation
 **What You Need:**

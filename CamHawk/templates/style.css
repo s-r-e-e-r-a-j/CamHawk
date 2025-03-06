@@ -1,26 +1,35 @@
-/* General styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background: linear-gradient(to right, #ffafbd, #ffc3a0);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
-
-/* Main container */
-.container {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0;
     text-align: center;
-    width: 300px;
+    color: #333;
 }
 
-/* Video preview */
-video {
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+}
+
+h1 {
+    font-size: 28px;
+    color: #ff4e50;
+}
+
+p {
+    font-size: 16px;
+    color: #555;
+}
+
+.friendship-image {
     width: 100%;
-    border-radius: 5px;
-    margin-top: 10px;
+    border-radius: 10px;
+    margin-top: 15px;
 }

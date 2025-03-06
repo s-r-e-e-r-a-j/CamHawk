@@ -28,7 +28,7 @@ CamHawk is made for ethical hacking and security research. Do not use it for ill
 **Steps to Install:**
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/CamHawk.git
+git clone https://github.com/s-r-e-e-r-a-j/CamHawk.git
 ```
 2. **Navigate to the CamHawk directory**
 ```bash  

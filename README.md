@@ -55,3 +55,7 @@ bash camhawk.sh
 4️⃣ Once they open the link, their camera activates, and images are saved automatically.
 
 5️⃣ Captured images are stored in the capture/ folder.
+
+## License
+
+This project is licensed under the MIT License.

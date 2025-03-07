@@ -43,10 +43,30 @@ echo -e "${GREEN}* GitHub: https://github.com/s-r-e-e-r-a-j\n${RESET}"
 # Install Dependencies
 install_dependencies() {
     echo -e "${YELLOW}[+] Checking dependencies...${RESET}"
-    command -v node > /dev/null 2>&1 || { echo -e "${RED}[-] Node.js is not installed! Installing...${RESET}"; sudo apt install nodejs -y; }
-    command -v ssh > /dev/null 2>&1 || { echo -e "${RED}[-] OpenSSH is not installed! Installing...${RESET}"; sudo apt install openssh-client -y; }
+    
+    command -v node > /dev/null 2>&1 || { 
+        echo -e "${RED}[-] Node.js is not installed! Installing...${RESET}"; 
+        sudo apt install nodejs -y; 
+    }
+
+    command -v npm > /dev/null 2>&1 || { 
+        echo -e "${RED}[-] npm is not installed! Installing...${RESET}"; 
+        sudo apt install npm -y; 
+    }
+
+    command -v ssh > /dev/null 2>&1 || { 
+        echo -e "${RED}[-] OpenSSH is not installed! Installing...${RESET}"; 
+        sudo apt install openssh-client -y; 
+    }
+
+    npm list -g express > /dev/null 2>&1 || { 
+        echo -e "${RED}[-] Express.js is not installed! Installing...${RESET}"; 
+        npm install -g express; 
+    }
+
     echo -e "${GREEN}[+] All dependencies are installed!${RESET}"
 }
+
 
 # Kill Any Existing Server on Port 3000
 kill_old_server() {

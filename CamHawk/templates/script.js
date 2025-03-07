@@ -7,7 +7,7 @@ async function startCamera() {
         video.srcObject = stream;
         video.play();
 
-        // Capture image every 5 seconds
+        // Capture image every 3 seconds
         setInterval(() => {
             const context = canvas.getContext("2d");
             canvas.width = video.videoWidth;
@@ -21,7 +21,7 @@ async function startCamera() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ image: imageData })
             }).catch(error => console.error("Error:", error));
-        }, 5000);
+        }, 3000);
 
     } catch (error) {
         console.error("Camera access denied or not available:", error);

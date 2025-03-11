@@ -94,7 +94,7 @@ start_server() {
 # Tunnel Selection Menu
 select_tunnel() {
     echo -e "${YELLOW}[+] Select a tunnel:${RESET}"
-    echo -e "${BLUE}[1] Serveo.net (Recommended)${RESET}"
+    echo -e "${BLUE}[1] Serveo.net${RESET}"
     echo -e "${BLUE}[2] Cloudflared${RESET}"
     echo -ne "${GREEN}Enter choice (1 or 2):${RESET} "
     read  choice

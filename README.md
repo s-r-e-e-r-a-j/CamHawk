@@ -1,21 +1,23 @@
 ## CamHawk 
-Advanced Camera Phishing Tool using Serveo.net for Port Forwarding
+Advanced Camera Phishing Tool using Serveo.net & Cloudflared for Port Forwarding
 
-CamHawk is a camera phishing tool that tricks users into granting webcam access captures their images and sends them to your machine. It uses JavaScript for the server, Bash scripting for automation, and Serveo.net for port forwarding.
-
+CamHawk is a camera phishing tool that tricks users into granting webcam access, captures their images, and sends them to your machine. It uses JavaScript for the server, Bash scripting for automation, and now supports multiple tunneling options for port forwarding.
 ## ⚠️ Disclaimer
 CamHawk is made for ethical hacking and security research. Do not use it for illegal activities. The developer is not responsible for any misuse
 
 ##  Features
 
-✔ Real-time Photo Capture – Saves images instantly upon access.
+✔ Real-time Photo Capture – Instantly saves images as soon as the target grants access.
 
-✔ Serveo.net Port Forwarding – No manual setup needed.
+✔ Multiple Port Forwarding Options – Choose between Serveo.net and Cloudflared for tunneling.
 
-✔ Live Terminal Updates – Displays "Photo Received!" when an image is captured.
+✔ Live Terminal Updates – Displays "Photo Received!" along with the target’s IP address when an image is captured.
 
-✔ User-Friendly Bash Script – Easily start, stop, and manage the server.
+✔ Automated Dependency Installation – Installs Node.js, express.js ,npm, SSH, and Cloudflared if missing.
 
+✔ User-Friendly Bash Script – Easily start, stop, and manage the server with a simple command.
+
+✔ Automatic Cloudflared Setup – Ensures Cloudflared is installed and configures it for tunneling.
 
 ##  Installation
 **What You Need:**
@@ -23,7 +25,9 @@ CamHawk is made for ethical hacking and security research. Do not use it for ill
 - **Linux** (`Kali, Parrot, Ubuntu, etc`.)
 - **npm** (required for install `expressjs`. if it is not installed it will automatically install `npm`)
 - **Node.js and expressjs** ( In linux distributions like `kalilinux`,`parrot os` etc.. it automatically install `nodejs` and `expressjs` if it is not installed)
-- **Serveo.net** (Automatically used for port forwarding)
+- **Port Forwarding Options:**
+- **Serveo.net** – Used as the default option for tunneling
+- **Cloudflared** – Available as an alternative for port forwarding and is automatically installed if missing.
   
 **Steps to Install:**
 1. **Clone the repository**
@@ -49,7 +53,7 @@ bash camhawk.sh
 ```bash
 bash camhawk.sh
 ```
-2️⃣ It will automatically set up Serveo.net for port forwarding.
+2️⃣ Choose a port forwarding method – Select between Serveo.net or Cloudflared for tunneling.
 
 3️⃣ Share the generated link with the target.
 

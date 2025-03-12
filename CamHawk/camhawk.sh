@@ -123,7 +123,7 @@ start_serveo() {
     fi
 }
 
-# Start Cloudflared Tunneling (Fixed)
+# Start Cloudflared Tunneling 
 start_cloudflared() {
     echo -e "${YELLOW}[+] Starting Cloudflared tunnel...${RESET}"
     cloudflared tunnel --url "http://localhost:$SERVER_PORT" > cloudflared.txt 2>&1 &

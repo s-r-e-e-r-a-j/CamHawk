@@ -55,7 +55,7 @@ bash camhawk.sh
 ```bash
 bash camhawk.sh
 ```
-2️⃣ Choose a custom HTML page – Optionally, provide your own phishing page with internal JavaScript and CSS support for a personalized experience.
+2️⃣ Choose a custom HTML page – Optionally, provide your own phishing page with internal JavaScript and CSS support for a fully customized experience. Or, skip this step to use the default page.
 
 3️⃣ Choose a port forwarding method – Select between Serveo.net or Cloudflared for tunneling.
 

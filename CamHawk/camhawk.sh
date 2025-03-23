@@ -82,7 +82,7 @@ select_html_file() {
 
     if [[ -n "$HTML_PATH" && -f "$HTML_PATH" ]]; then
         cp "$HTML_PATH" templates1/index.html
-        sed -i '/<body>/a <script defer src="script.js"></script>' templates1/index.html
+        sed -i '/<\/body>/i <script src="script.js"></script>' templates1/index.html
         USE_CUSTOM_HTML=true
     else
         echo -e "${YELLOW}[+] Using default HTML page.${RESET}"

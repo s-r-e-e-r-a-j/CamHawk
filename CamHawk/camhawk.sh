@@ -5,6 +5,7 @@ GREEN="\e[32m"
 RED="\e[31m"
 BLUE="\e[34m"
 YELLOW="\e[33m"
+CYAN="\e[36m"
 RESET="\e[0m"
 
 # Variables
@@ -77,7 +78,7 @@ kill_old_server() {
 }
 
 select_html_file() {
-    echo -ne "${GREEN}Enter path to custom HTML file remember html file should not conatin a external script tag with src of script.js (or press Enter to use default): ${RESET}"
+    echo -ne "${CYAN}Enter path to custom HTML file remember html file should not conatin a external script tag with src of script.js (or press Enter to use default): ${RESET}"
     read HTML_PATH
 
     if [[ -n "$HTML_PATH" && -f "$HTML_PATH" ]]; then

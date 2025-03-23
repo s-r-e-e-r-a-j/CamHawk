@@ -13,11 +13,13 @@ CamHawk is made for ethical hacking and security research. Do not use it for ill
 
 ✔ Live Terminal Updates – Displays "Photo Received!" along with the target’s IP address when an image is captured.
 
-✔ Automated Dependency Installation – Installs Node.js, express.js ,npm, SSH, and Cloudflared if missing.
+✔ Automated Dependency Installation – Installs Node.js, Express.js, npm, SSH, and Cloudflared if missing.
 
 ✔ User-Friendly Bash Script – Easily start, stop, and manage the server with a simple command.
 
 ✔ Automatic Cloudflared Setup – Ensures Cloudflared is installed and configures it for tunneling.
+
+✔ Custom HTML Support – Allows users to provide their own phishing page without external <script src="script.js"></script>. JavaScript will be directly embedded in the HTML, and internal CSS is fully supported.
 
 ##  Installation
 **What You Need:**
@@ -53,13 +55,15 @@ bash camhawk.sh
 ```bash
 bash camhawk.sh
 ```
-2️⃣ Choose a port forwarding method – Select between Serveo.net or Cloudflared for tunneling.
+2️⃣ Choose a custom HTML page – Optionally, provide your own phishing page with internal JavaScript and CSS support for a personalized experience.
 
-3️⃣ Share the generated link with the target.
+3️⃣ Choose a port forwarding method – Select between Serveo.net or Cloudflared for tunneling.
 
-4️⃣ Once they open the link, their camera activates, and images are saved automatically.
+4️⃣ Share the generated link with the target.
 
-5️⃣ Captured images are stored in the capture/ folder.
+5️⃣ Once they open the link, their camera activates, and images are saved automatically.
+
+6️⃣ Captured images are stored in the capture/ folder.
 
 ## License
 

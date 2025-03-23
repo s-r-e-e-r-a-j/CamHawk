@@ -19,7 +19,7 @@ CamHawk is made for ethical hacking and security research. Do not use it for ill
 
 ✔ Automatic Cloudflared Setup – Ensures Cloudflared is installed and configures it for tunneling.
 
-✔ Custom HTML Support – Allows users to provide their own phishing page with full customization. Supports internal CSS, embedded JavaScript, and external JavaScript files, except for <script src="script.js"></script>, which is excluded for compatibility.
+✔ Custom HTML Support – Allows users to provide their own phishing page with full customization. Supports internal CSS and embedded JavaScript
 
 ##  Installation
 **What You Need:**

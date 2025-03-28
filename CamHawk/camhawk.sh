@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Colors
-GREEN="\e[32m"
-RED="\e[31m"
-BLUE="\e[34m"
-YELLOW="\e[33m"
-CYAN="\e[36m"
+GREEN="\e[1;32m"
+RED="\e[1;31m"
+BLUE="\e[1;34m"
+YELLOW="\e[1;33m"
+CYAN="\e[1;36m"
 RESET="\e[0m"
 
 # Variables
@@ -38,6 +38,7 @@ EOF
 # Install Dependencies
 install_dependencies() {
     echo -e "${YELLOW}[+] Checking dependencies...${RESET}"
+    sudo apt-get update;
     
     command -v node > /dev/null 2>&1 || { 
         echo -e "${RED}[-] Node.js is not installed! Installing...${RESET}"; 
@@ -78,7 +79,7 @@ kill_old_server() {
 }
 
 select_html_file() {
-    echo -ne "${CYAN}Enter the path to the custom HTML file (or press Enter to use the default): ${RESET}"
+    echo -ne "${CYAN}[+] Enter the path to the custom HTML file (or press Enter to use the default): ${RESET}"
     read HTML_PATH
 
     if [[ -n "$HTML_PATH" && -f "$HTML_PATH" ]]; then
@@ -114,9 +115,9 @@ start_server() {
 # Tunnel Selection Menu
 select_tunnel() {
     echo -e "${YELLOW}[+] Select a tunnel:${RESET}"
-    echo -e "${BLUE}[1] Serveo.net${RESET}"
-    echo -e "${BLUE}[2] Cloudflared${RESET}"
-    echo -ne "${GREEN}Enter choice (1 or 2):${RESET} "
+    echo -e "\e[1;92m[\e[0m\e[1;77m1\e[0m\e[1;92m]\e[0m ${BLUE}Serveo.net${RESET}"
+    echo -e "\e[1;92m[\e[0m\e[1;77m2\e[0m\e[1;92m]\e[0m ${BLUE}Cloudflared${RESET}"
+    echo -ne "${GREEN}[+] Enter choice (1 or 2):${RESET} "
     read  choice
 
     case $choice in

@@ -192,6 +192,7 @@ trap stop_server SIGINT
 # Run the script
 banner
 install_dependencies
+banner
 kill_old_server
 select_html_file
 start_server

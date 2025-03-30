@@ -79,6 +79,7 @@ install_dependencies() {
             sudo apt install openssh-client -y
         fi
     }
+    
     # Express.js installation
     npm list -g --depth=0 | grep -q 'express@' || {
         echo -e "${RED}[-] Express.js is not installed! Installing...${RESET}";

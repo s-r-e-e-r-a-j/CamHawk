@@ -79,22 +79,21 @@ install_dependencies() {
             sudo apt install openssh-client -y
         fi
     }
-
     # Express.js installation
     npm list -g --depth=0 | grep -q 'express@' || {
-        echo -e "${RED}[-] Express.js is not installed! Installing...${RESET}";
-        if [ "$IS_TERMUX" = true ]; then
-            npm install -g express
-        else
-            sudo npm install -g express
-        fi
+        echo -e "${RED}[-] Express.js is not installed! Installing...${RESET}"
+            sudo npm install -g express      
     }
+
+    if [ "$IS_TERMUX" = true ]; then
+       npm install -g express
+    fi
 
     # Cloudflared installation
     command -v cloudflared > /dev/null 2>&1 || {
         echo -e "${RED}[-] Cloudflared is not installed! Installing...${RESET}";
         if [ "$IS_TERMUX" = true ]; then
-            curl -s https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64 -o cloudflared
+            curl -s -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64 -o cloudflared
             chmod +x cloudflared
             mv cloudflared $PREFIX/bin
         else

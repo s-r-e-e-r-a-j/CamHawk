@@ -55,10 +55,11 @@ install_dependencies() {
         sudo apt install openssh-client -y; 
     }
 
-    npm list -g --depth=0 | grep -q 'express@' || { 
-        echo -e "${RED}[-] Express.js is not installed! Installing...${RESET}"; 
-        sudo npm install -g express; 
-    }
+    [ -d "node_modules/express" ] || { 
+    echo -e "${RED}[-] Express.js is not installed locally! Installing...${RESET}"; 
+    npm install express; 
+   }
+
 
     command -v cloudflared > /dev/null 2>&1 || { 
         echo -e "${RED}[-] Cloudflared is not installed! Installing...${RESET}"; 

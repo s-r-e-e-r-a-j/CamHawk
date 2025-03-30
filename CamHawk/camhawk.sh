@@ -38,74 +38,35 @@ EOF
 # Install Dependencies
 install_dependencies() {
     echo -e "${YELLOW}[+] Checking dependencies...${RESET}"
+    sudo apt-get update;
     
-    # Detecting Termux or Linux
-    if command -v termux-info > /dev/null 2>&1; then
-        IS_TERMUX=true
-        echo -e "${YELLOW}[+] Detected Termux environment.${RESET}"
-        pkg update
-    else
-        IS_TERMUX=false
-        echo -e "${YELLOW}[+] Detected Linux environment.${RESET}"
-        sudo apt-get update
-    fi
-
-    # Node.js installation
-    command -v node > /dev/null 2>&1 || {
-        echo -e "${RED}[-] Node.js is not installed! Installing...${RESET}";
-        if [ "$IS_TERMUX" = true ]; then
-            pkg install nodejs -y
-        else
-            sudo apt install nodejs -y
-        fi
+    command -v node > /dev/null 2>&1 || { 
+        echo -e "${RED}[-] Node.js is not installed! Installing...${RESET}"; 
+        sudo apt install nodejs -y; 
     }
 
-    # npm installation
-    command -v npm > /dev/null 2>&1 || {
-        echo -e "${RED}[-] npm is not installed! Installing...${RESET}";
-        if [ "$IS_TERMUX" = true ]; then
-            pkg install npm -y
-        else
-            sudo apt install npm -y
-        fi
+    command -v npm > /dev/null 2>&1 || { 
+        echo -e "${RED}[-] npm is not installed! Installing...${RESET}"; 
+        sudo apt install npm -y; 
     }
 
-    # OpenSSH installation
-    command -v ssh > /dev/null 2>&1 || {
-        echo -e "${RED}[-] OpenSSH is not installed! Installing...${RESET}";
-        if [ "$IS_TERMUX" = true ]; then
-            pkg install openssh -y
-        else
-            sudo apt install openssh-client -y
-        fi
-    }
-    
-    # Express.js installation
-    npm list -g --depth=0 | grep -q 'express@' || {
-        echo -e "${RED}[-] Express.js is not installed! Installing...${RESET}";
-        if [ "$IS_TERMUX" = true ]; then
-            npm install -g express
-        else
-            sudo npm install -g express
-        fi
+    command -v ssh > /dev/null 2>&1 || { 
+        echo -e "${RED}[-] OpenSSH is not installed! Installing...${RESET}"; 
+        sudo apt install openssh-client -y; 
     }
 
-    # Cloudflared installation
-    command -v cloudflared > /dev/null 2>&1 || {
-        echo -e "${RED}[-] Cloudflared is not installed! Installing...${RESET}";
-        if [ "$IS_TERMUX" = true ]; then
-            curl -s -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64 -o cloudflared
-            chmod +x cloudflared
-            mv cloudflared $PREFIX/bin
-        else
-            sudo wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O /usr/local/bin/cloudflared
-            sudo chmod +x /usr/local/bin/cloudflared
-        fi
+    npm list -g --depth=0 | grep -q 'express@' || { 
+        echo -e "${RED}[-] Express.js is not installed! Installing...${RESET}"; 
+        sudo npm install -g express; 
+    }
+
+    command -v cloudflared > /dev/null 2>&1 || { 
+        echo -e "${RED}[-] Cloudflared is not installed! Installing...${RESET}"; 
+        sudo wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O /usr/local/bin/cloudflared && sudo chmod +x /usr/local/bin/cloudflared; 
     }
 
     echo -e "${GREEN}[+] All dependencies are installed!${RESET}"
 }
-
 
 # Kill Any Existing Server on Port 3000
 kill_old_server() {

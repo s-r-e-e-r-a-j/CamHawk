@@ -90,10 +90,6 @@ install_dependencies() {
         fi
     }
 
-    if [ "$IS_TERMUX" = true ]; then
-       npm install -g express
-    fi
-
     # Cloudflared installation
     command -v cloudflared > /dev/null 2>&1 || {
         echo -e "${RED}[-] Cloudflared is not installed! Installing...${RESET}";

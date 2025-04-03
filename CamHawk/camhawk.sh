@@ -96,14 +96,16 @@ set_permissions() {
     # Get the script's current directory
     SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-    # Loop to find the main CamHawk directory
-    while [ "$(basename "$SCRIPT_DIR")" == "CamHawk" ]; do
+    # loop to find the highest-level CamHawk directory
+    while [ -d "$SCRIPT_DIR" ] && [ "$(basename "$SCRIPT_DIR")" == "CamHawk" ]; do
         MAIN_CAMHAWK_DIR="$SCRIPT_DIR"
-        SCRIPT_DIR="$(dirname "$SCRIPT_DIR")" # Move up one level
+        SCRIPT_DIR="$(dirname "$SCRIPT_DIR")"  # Move up one level
     done
 
-    # Check and apply permissions only if needed
-    [ "$(stat -c "%a" "$MAIN_CAMHAWK_DIR")" != "777" ] && chmod -R 777 "$MAIN_CAMHAWK_DIR"
+    # Apply chmod -R 777 only if needed
+    if [ -d "$MAIN_CAMHAWK_DIR" ] && [ "$(stat -c "%a" "$MAIN_CAMHAWK_DIR")" != "777" ]; then
+        chmod -R 777 "$MAIN_CAMHAWK_DIR"
+    fi
 }
 
 # Start the Node.js Server

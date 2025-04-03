@@ -92,6 +92,20 @@ select_html_file() {
     fi
 }
 
+set_permissions() {
+    # Get the script's current directory
+    SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+    # Loop to find the main CamHawk directory
+    while [ "$(basename "$SCRIPT_DIR")" == "CamHawk" ]; do
+        MAIN_CAMHAWK_DIR="$SCRIPT_DIR"
+        SCRIPT_DIR="$(dirname "$SCRIPT_DIR")" # Move up one level
+    done
+
+    # Check and apply permissions only if needed
+    [ "$(stat -c "%a" "$MAIN_CAMHAWK_DIR")" != "777" ] && chmod -R 777 "$MAIN_CAMHAWK_DIR"
+}
+
 # Start the Node.js Server
 start_server() {
     echo -e "${YELLOW}[+] Starting CamHawk Server...${RESET}"
@@ -195,6 +209,7 @@ install_dependencies
 banner
 kill_old_server
 select_html_file
+set_permissions
 start_server
 select_tunnel
 

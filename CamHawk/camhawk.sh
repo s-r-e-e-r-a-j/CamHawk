@@ -92,24 +92,6 @@ select_html_file() {
     fi
 }
 
-set_permissions() {
-    # Get the script's current directory
-    SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-
-    # Loop to find the CamHawk directory
-    while [ -d "$SCRIPT_DIR" ] && [ "$(basename "$SCRIPT_DIR")" != "CamHawk" ]; do
-        SCRIPT_DIR="$(dirname "$SCRIPT_DIR")"
-    done
-
-    # Define the capture directory path
-    CAPTURE_DIR="$SCRIPT_DIR/capture"
-
-    # Apply chmod -R 777 only to capture directory if needed
-    if [ -d "$CAPTURE_DIR" ] && [ "$(stat -c "%a" "$CAPTURE_DIR")" != "777" ]; then
-        chmod -R 777 "$CAPTURE_DIR"
-    fi
-}
-
 # Start the Node.js Server
 start_server() {
     echo -e "${YELLOW}[+] Starting CamHawk Server...${RESET}"
@@ -213,7 +195,6 @@ install_dependencies
 banner
 kill_old_server
 select_html_file
-set_permissions
 start_server
 select_tunnel
 

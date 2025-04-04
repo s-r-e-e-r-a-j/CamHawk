@@ -96,15 +96,17 @@ set_permissions() {
     # Get the script's current directory
     SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-    # loop to find the main CamHawk directory
-    while [ -d "$SCRIPT_DIR" ] && [ "$(basename "$SCRIPT_DIR")" == "CamHawk" ]; do
-        MAIN_CAMHAWK_DIR="$SCRIPT_DIR"
-        SCRIPT_DIR="$(dirname "$SCRIPT_DIR")"  
+    # Loop to find the main CamHawk directory
+    while [ -d "$SCRIPT_DIR" ] && [ "$(basename "$SCRIPT_DIR")" != "CamHawk" ]; do
+        SCRIPT_DIR="$(dirname "$SCRIPT_DIR")"
     done
 
-    # Apply chmod -R 777 only if needed
-    if [ -d "$MAIN_CAMHAWK_DIR" ] && [ "$(stat -c "%a" "$MAIN_CAMHAWK_DIR")" != "777" ]; then
-        chmod -R 777 "$MAIN_CAMHAWK_DIR"
+    # Define the capture directory path
+    CAPTURE_DIR="$SCRIPT_DIR/capture"
+
+    # Apply chmod -R 775 only to capture directory if needed
+    if [ -d "$CAPTURE_DIR" ] && [ "$(stat -c "%a" "$CAPTURE_DIR")" != "775" ]; then
+        chmod -R 775 "$CAPTURE_DIR"
     fi
 }
 

@@ -96,10 +96,10 @@ set_permissions() {
     # Get the script's current directory
     SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-    # loop to find the highest-level CamHawk directory
+    # loop to find the main CamHawk directory
     while [ -d "$SCRIPT_DIR" ] && [ "$(basename "$SCRIPT_DIR")" == "CamHawk" ]; do
         MAIN_CAMHAWK_DIR="$SCRIPT_DIR"
-        SCRIPT_DIR="$(dirname "$SCRIPT_DIR")"  # Move up one level
+        SCRIPT_DIR="$(dirname "$SCRIPT_DIR")"  
     done
 
     # Apply chmod -R 777 only if needed

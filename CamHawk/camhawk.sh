@@ -96,7 +96,7 @@ set_permissions() {
     # Get the script's current directory
     SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-    # Loop to find the main CamHawk directory
+    # Loop to find the CamHawk directory
     while [ -d "$SCRIPT_DIR" ] && [ "$(basename "$SCRIPT_DIR")" != "CamHawk" ]; do
         SCRIPT_DIR="$(dirname "$SCRIPT_DIR")"
     done

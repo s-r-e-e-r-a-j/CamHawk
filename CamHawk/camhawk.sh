@@ -105,8 +105,8 @@ set_permissions() {
     CAPTURE_DIR="$SCRIPT_DIR/capture"
 
     # Apply chmod -R 775 only to capture directory if needed
-    if [ -d "$CAPTURE_DIR" ] && [ "$(stat -c "%a" "$CAPTURE_DIR")" != "775" ]; then
-        chmod -R 775 "$CAPTURE_DIR"
+    if [ -d "$CAPTURE_DIR" ] && [ "$(stat -c "%a" "$CAPTURE_DIR")" != "777" ]; then
+        chmod -R 777 "$CAPTURE_DIR"
     fi
 }
 

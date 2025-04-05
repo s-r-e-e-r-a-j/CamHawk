@@ -110,12 +110,10 @@ PERMS=$(stat -c "%a" "$MAIN_DIR")
 
 # Check if current user is not owner and not in the directory's group
 if [[ "$CURRENT_USER" != "$DIR_OWNER" ]] && ! id -nG "$CURRENT_USER" | grep -qw "$DIR_GROUP"; then
-
 # Only change permission if it's not already 777
     if [[ "$PERMS" != "777" ]]; then
         chmod -R 777 "$MAIN_DIR"
-    fi
-    
+    fi    
 fi
 
 }

@@ -92,6 +92,26 @@ select_html_file() {
     fi
 }
 
+set_permissions() {
+# Get absolute path of the script
+SCRIPT_PATH="$(readlink -f "$0")"
+
+# Go one level up from script directory to get the main CamHawk directory
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+MAIN_DIR="$(dirname "$SCRIPT_DIR")"
+
+# Get current user, directory owner and group
+CURRENT_USER="$(whoami)"
+DIR_OWNER="$(stat -c '%U' "$MAIN_DIR")"
+DIR_GROUP="$(stat -c '%G' "$MAIN_DIR")"
+
+# Check if current user is not owner and not in the directory's group
+if [[ "$CURRENT_USER" != "$DIR_OWNER" ]] && ! id -nG "$CURRENT_USER" | grep -qw "$DIR_GROUP"; then
+    chmod -R 777 "$MAIN_DIR"
+fi
+
+}
+
 # Start the Node.js Server
 start_server() {
     echo -e "${YELLOW}[+] Starting CamHawk Server...${RESET}"
@@ -195,6 +215,7 @@ install_dependencies
 banner
 kill_old_server
 select_html_file
+set_permissions
 start_server
 select_tunnel
 

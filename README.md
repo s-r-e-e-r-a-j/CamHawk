@@ -61,7 +61,7 @@ bash camhawk.sh
 
 4️⃣ Share the generated link with the target.
 
-5️⃣ Once they open the link and give a permission, their camera activates, and images are saved automatically.
+5️⃣ Once they open the link and grant permission, their camera is activated and images are saved automatically..
 
 6️⃣ Captured images are stored in the capture/ folder.
 

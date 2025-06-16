@@ -28,8 +28,8 @@ CamHawk is made for ethical hacking and security research. Do not use it for ill
 - **npm** (required for install `express.js`. if it is not installed it will automatically install `npm`)
 - **Node.js and expressjs** ( In linux distributions like `kalilinux`,`parrot os` etc.. it automatically install `nodejs` and `expressjs` if it is not installed)
 - **Port Forwarding Options:**
-      - **Serveo.net** – Used as the default option for tunneling
-      - **Cloudflared** – Available as an alternative for port forwarding and is automatically installed if missing.
+      - **Serveo.net** – Used           as the default                option for tunneling
+      - **Cloudflared** –               Available as an               alternative for               port forwarding and           is automatically              installed if missing.
   
 **Steps to Install:**
 1. **Clone the repository**

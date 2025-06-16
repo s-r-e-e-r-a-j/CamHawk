@@ -24,7 +24,7 @@ CamHawk is made for ethical hacking and security research. Do not use it for ill
 ##  Installation
 **What You Need:**
 
-- **Linux** (`Kali, Parrot, Ubuntu, etc`.)
+- **Linux Debian** (`Kali, Parrot, Ubuntu, etc`.)
 - **npm** (required for install `express.js`. if it is not installed it will automatically install `npm`)
 - **Node.js and expressjs** ( In linux distributions like `kalilinux`,`parrot os` etc.. it automatically install `nodejs` and `expressjs` if it is not installed)
 - **Port Forwarding Options:**

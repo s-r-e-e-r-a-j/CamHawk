@@ -2,8 +2,11 @@
 Advanced Camera Phishing Tool using Serveo.net & Cloudflared for Port Forwarding
 
 CamHawk is a camera phishing tool that tricks users into granting webcam access, captures their images, and sends them to your machine. It uses JavaScript for the server, Bash scripting for automation, and now supports multiple tunneling options for port forwarding.
+
 ## ⚠️ Disclaimer
-CamHawk is made for ethical hacking and security research. Do not use it for illegal activities. The developer is not responsible for any misuse
+
+CamHawk is developed strictly for **educational purposes, ethical hacking demonstrations, and security research**. It is intended to help penetration testers and researchers understand how camera phishing attacks work, so they can better defend against them.
+**Do not use this tool for illegal or unauthorized activities. The developer assumes no responsibility for any misuse.**
 
 ##  Features
 

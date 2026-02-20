@@ -10,26 +10,26 @@ CamHawk is developed strictly for **educational purposes, ethical hacking demons
 
 ##  Features
 
-✔ Real-time Photo Capture – Instantly saves images as soon as the target grants access.
+- **Real-time Photo Capture** – Instantly saves images as soon as the target grants access.
 
-✔ Multiple Port Forwarding Options – Choose between Serveo.net and Cloudflared for tunneling.
+- **Multiple Port Forwarding Options** – Choose between Serveo.net and Cloudflared for tunneling.
 
-✔ Live Terminal Updates – Displays "Photo Received!" along with the target’s IP address when an image is captured.
+- **Live Terminal Updates** – Displays "Photo Received!" along with the target’s IP address when an image is captured.
 
-✔ Automated Dependency Installation – Installs Node.js, Express.js, npm, SSH, and Cloudflared if missing.
+- **Automated Dependency Installation** – Installs Node.js, Express.js, npm, SSH, and Cloudflared if missing.
 
-✔ User-Friendly Bash Script – Easily start, stop, and manage the server with a simple command.
+- **User-Friendly Bash Script** – Easily start, stop, and manage the server with a simple command.
 
-✔ Automatic Cloudflared Setup – Ensures Cloudflared is installed and configures it for tunneling.
+- **Automatic Cloudflared Setup** – Ensures Cloudflared is installed and configures it for tunneling.
 
-✔ Custom HTML Support – Allows users to provide their own phishing page with full customization. Supports internal CSS and embedded JavaScript
+- **Custom HTML Support** – Allows users to provide their own phishing page with full customization. Supports internal CSS and embedded JavaScript
 
 ##  Installation
 **What You Need:**
 
-- **Linux Debian** (`Kali, Parrot, Ubuntu, etc`.)
+- **Linux (Debian, RHEL, Arch** (`Kali, Parrot, Ubuntu, Black Arch, Fedora etc`.)
 - **npm** (required for install `express.js`. if it is not installed it will automatically install `npm`)
-- **Node.js and expressjs** ( In linux distributions like `kalilinux`,`parrot os` etc.. it automatically install `nodejs` and `expressjs` if it is not installed)
+- **Node.js and expressjs** ( In linux distributions like `Debian`,`RHEL`, `Arch` etc.. it automatically install `nodejs` and `expressjs` if it is not installed)
 - **Port Forwarding Options:**
 
 - **Serveo.net** – Used           as the default                option for tunneling
@@ -55,20 +55,27 @@ bash camhawk.sh
 ```
 
 ##  How to Use
-1️⃣ Run the tool:
+1. **Run the tool**:
 
 ```bash
 bash camhawk.sh
 ```
-2️⃣ Choose a custom HTML page – Optionally, provide your own phishing page with internal JavaScript and CSS support for a fully customized experience. Or, skip this step to use the default page.
+**OR**
 
-3️⃣ Choose a port forwarding method – Select between Serveo.net or Cloudflared for tunneling.
+```bash
+chmod +x camhawk.sh
+./camhawk.sh
+```
 
-4️⃣ Share the generated link with the target.
+2. **Choose a custom HTML page** – Optionally, provide your own phishing page with internal JavaScript and CSS support for a fully customized experience. Or, skip this step to use the default page.
 
-5️⃣ Once they open the link and grant permission, their camera is activated and images are saved automatically..
+3. **Choose a port forwarding method** – Select between `Serveo.net` or `Cloudflared` for tunneling.
 
-6️⃣ Captured images are stored in the capture/ folder.
+4. **Share the generated link with the target**.
+
+5. **Once they open the link and grant permission, their camera is activated and images are saved automatically**.
+
+6. **Captured images are stored in the `capture/` folder.
 
 ## License
 

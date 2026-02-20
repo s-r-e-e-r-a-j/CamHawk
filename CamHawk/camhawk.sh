@@ -38,32 +38,52 @@ EOF
 # Install Dependencies
 install_dependencies() {
     echo -e "${YELLOW}[+] Checking dependencies...${RESET}"
-    sudo apt-get update;
-    
-    command -v node > /dev/null 2>&1 || { 
-        echo -e "${RED}[-] Node.js is not installed! Installing...${RESET}"; 
-        sudo apt install nodejs -y; 
-    }
 
-    command -v npm > /dev/null 2>&1 || { 
-        echo -e "${RED}[-] npm is not installed! Installing...${RESET}"; 
-        sudo apt install npm -y; 
-    }
+    # Detect package manager
+    if command -v apt-get &>/dev/null; then
+        PKG_INSTALL="sudo apt-get install -y"
+        UPDATE_CMD="sudo apt-get update"
+    elif command -v yum &>/dev/null; then
+        PKG_INSTALL="sudo yum install -y"
+        UPDATE_CMD="sudo yum check-update"
+    elif command -v dnf &>/dev/null; then
+        PKG_INSTALL="sudo dnf install -y"
+        UPDATE_CMD="sudo dnf check-update"
+    elif command -v pacman &>/dev/null; then
+        PKG_INSTALL="sudo pacman -S --noconfirm"
+        UPDATE_CMD="sudo pacman -Sy"
+    else
+        echo -e "${RED}[-] No supported package manager found! Please install dependencies manually.${RESET}"
+        return 1
+    fi
 
-    command -v ssh > /dev/null 2>&1 || { 
-        echo -e "${RED}[-] OpenSSH is not installed! Installing...${RESET}"; 
-        sudo apt install openssh-client -y; 
-    }
+    $UPDATE_CMD
+
+    if ! command -v node &>/dev/null; then
+        echo -e "${RED}[-] Node.js is not installed! Installing...${RESET}"
+        $PKG_INSTALL nodejs
+    fi
+
+    if ! command -v npm &>/dev/null; then
+        echo -e "${RED}[-] npm is not installed! Installing...${RESET}"
+        $PKG_INSTALL npm
+    fi
+
+    if ! command -v ssh &>/dev/null; then
+        echo -e "${RED}[-] OpenSSH client is not installed! Installing...${RESET}"
+        $PKG_INSTALL openssh-client || $PKG_INSTALL openssh
+    fi
 
     npm list express 2>/dev/null | grep -q "express@" || { 
-    echo -e "${RED}[-] Express.js is not installed! Installing...${RESET}"; 
-    npm install express; 
+        echo -e "${RED}[-] Express.js is not installed! Installing...${RESET}"; 
+        npm install express; 
     }
 
-    command -v cloudflared > /dev/null 2>&1 || { 
-        echo -e "${RED}[-] Cloudflared is not installed! Installing...${RESET}"; 
-        sudo wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O /usr/local/bin/cloudflared && sudo chmod +x /usr/local/bin/cloudflared; 
-    }
+    if ! command -v cloudflared &>/dev/null; then
+        echo -e "${RED}[-] Cloudflared is not installed! Installing...${RESET}"
+        sudo wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O /usr/local/bin/cloudflared
+        sudo chmod +x /usr/local/bin/cloudflared
+    fi
 
     echo -e "${GREEN}[+] All dependencies are installed!${RESET}"
 }

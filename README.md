@@ -27,9 +27,9 @@ CamHawk is developed strictly for **educational purposes, ethical hacking demons
 ##  Installation
 **What You Need:**
 
-- **Linux (Debian, RHEL, Arch**) (`Kali, Parrot, Ubuntu, Black Arch, Fedora etc`.)
+- **Linux (Debian, RHEL, Arch**) (`Kali, Parrot, Ubuntu, Black Arch, Fedora, etc`.)
 - **npm** (required for install `express.js`. if it is not installed it will automatically install `npm`)
-- **Node.js and expressjs** ( In linux distributions like `Debian`,`RHEL`, `Arch` etc.. it automatically install `nodejs` and `expressjs` if it is not installed)
+- **Node.js and expressjs** ( In linux distributions like `Debian`,`RHEL`, `Arch` it automatically install `nodejs` and `expressjs` if it is not installed)
 - **Port Forwarding Options:**
 
    - **Serveo.net** – Used           as the default                option for tunneling
@@ -75,7 +75,7 @@ chmod +x camhawk.sh
 
 5. **Once they open the link and grant permission, their camera is activated and images are saved automatically**.
 
-6. **Captured images are stored in the `capture/` folder.
+6. **Captured images are stored in the `capture/` folder.**
 
 ## License
 

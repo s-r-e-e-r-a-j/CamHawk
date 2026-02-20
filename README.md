@@ -27,14 +27,14 @@ CamHawk is developed strictly for **educational purposes, ethical hacking demons
 ##  Installation
 **What You Need:**
 
-- **Linux (Debian, RHEL, Arch** (`Kali, Parrot, Ubuntu, Black Arch, Fedora etc`.)
+- **Linux (Debian, RHEL, Arch**) (`Kali, Parrot, Ubuntu, Black Arch, Fedora etc`.)
 - **npm** (required for install `express.js`. if it is not installed it will automatically install `npm`)
 - **Node.js and expressjs** ( In linux distributions like `Debian`,`RHEL`, `Arch` etc.. it automatically install `nodejs` and `expressjs` if it is not installed)
 - **Port Forwarding Options:**
 
-- **Serveo.net** – Used           as the default                option for tunneling
+   - **Serveo.net** – Used           as the default                option for tunneling
   
-- **Cloudflared** –               Available as an               alternative for               port forwarding and           is automatically              installed if missing.
+   - **Cloudflared** –               Available as an               alternative for               port forwarding and           is automatically              installed if missing.
   
 **Steps to Install:**
 1. **Clone the repository**

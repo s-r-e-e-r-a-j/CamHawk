@@ -69,6 +69,11 @@ install_dependencies() {
         $PKG_INSTALL npm
     fi
 
+    if ! command -v lsof &>/dev/null; then
+        echo -e "${RED} [-] lsof is not installed! Installing...${RESET}"
+        $PKG_INSTALL lsof
+    fi
+
     if ! command -v ssh &>/dev/null; then
         echo -e "${RED}[-] OpenSSH client is not installed! Installing...${RESET}"
         $PKG_INSTALL openssh-client || $PKG_INSTALL openssh

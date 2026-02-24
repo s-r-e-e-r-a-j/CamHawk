@@ -51,7 +51,7 @@ install_dependencies() {
         UPDATE_CMD="sudo dnf check-update"
     elif command -v pacman &>/dev/null; then
         PKG_INSTALL="sudo pacman -S --noconfirm"
-        UPDATE_CMD="sudo pacman -Sy"
+        UPDATE_CMD="sudo pacman -Syu"
     else
         echo -e "${RED}[-] No supported package manager found! Please install dependencies manually.${RESET}"
         return 1

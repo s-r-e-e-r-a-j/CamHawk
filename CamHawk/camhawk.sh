@@ -118,29 +118,34 @@ select_html_file() {
 }
 
 set_permissions() {
-# Get absolute path of the script
-SCRIPT_PATH="$(readlink -f "$0")"
+    # Get absolute path of the script
+    SCRIPT_PATH="$(readlink -f "$0")"
 
-# Go one level up from script directory to get the main CamHawk directory
-SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-MAIN_DIR="$(dirname "$SCRIPT_DIR")"
+    # Go one level up from script directory to get the main CamHawk directory
+    SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+    MAIN_DIR="$(dirname "$SCRIPT_DIR")"
 
-# Get current user, directory owner and group
-CURRENT_USER="$(whoami)"
-DIR_OWNER="$(stat -c '%U' "$MAIN_DIR")"
-DIR_GROUP="$(stat -c '%G' "$MAIN_DIR")"
+    # Get current user, directory owner and group
+    CURRENT_USER="$(whoami)"
+    DIR_OWNER="$(stat -c '%U' "$MAIN_DIR")"
+    DIR_GROUP="$(stat -c '%G' "$MAIN_DIR")"
 
-# Get current permissions of CamHawk directory
-PERMS=$(stat -c "%a" "$MAIN_DIR")
+    # Fix access if user is not owner and not in group OR cannot write
+    if [[ ! -w "$MAIN_DIR" ]] || ([[ "$CURRENT_USER" != "$DIR_OWNER" ]] && ! id -nG "$CURRENT_USER" | grep -qw "$DIR_GROUP"); then
 
-# Check if current user is not owner and not in the directory's group
-if [[ "$CURRENT_USER" != "$DIR_OWNER" ]] && ! id -nG "$CURRENT_USER" | grep -qw "$DIR_GROUP"; then
-# Only change permission if it's not already 777
-    if [[ "$PERMS" != "777" ]]; then
-        chmod -R 777 "$MAIN_DIR"
-    fi    
-fi
+        if [[ "$EUID" -eq 0 ]]; then
+            # Running as root -> restore ownership to real user
+            TARGET_USER="${SUDO_USER:-$(logname 2>/dev/null || echo root)}"
+            chown -R "$TARGET_USER":"$TARGET_USER" "$MAIN_DIR" 2>/dev/null
+            chmod -R u+rwx "$MAIN_DIR" 2>/dev/null
+        else
+            # Running as normal user -> grant safe access
+            chmod -R u+rwX "$MAIN_DIR" 2>/dev/null
+        fi
 
+        # Final fallback if still not writable
+        [[ -w "$MAIN_DIR" ]] || chmod -R 777 "$MAIN_DIR" 2>/dev/null
+    fi
 }
 
 # Start the Node.js Server

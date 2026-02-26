@@ -93,6 +93,12 @@ install_dependencies() {
     echo -e "${GREEN}[+] All dependencies are installed!${RESET}"
 }
 
+create_needed_files() {
+      touch server.log 2>/dev/null
+      touch cloudflared.txt 2>/dev/null
+      touch serveo.txt 2>/dev/null
+}
+
 # Kill Any Existing Server on Port 3000
 kill_old_server() {
     OLD_PID=$(lsof -ti :$SERVER_PORT)
@@ -248,6 +254,7 @@ trap stop_server SIGINT
 # Run the script
 banner
 install_dependencies
+create_needed_files
 banner
 kill_old_server
 select_html_file

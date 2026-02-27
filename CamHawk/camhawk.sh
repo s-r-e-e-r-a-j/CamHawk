@@ -45,10 +45,10 @@ install_dependencies() {
         UPDATE_CMD="sudo apt-get update"
     elif command -v yum &>/dev/null; then
         PKG_INSTALL="sudo yum install -y"
-        UPDATE_CMD="sudo yum check-update"
+        UPDATE_CMD="sudo yum update -y"
     elif command -v dnf &>/dev/null; then
         PKG_INSTALL="sudo dnf install -y"
-        UPDATE_CMD="sudo dnf check-update"
+        UPDATE_CMD="sudo dnf update -y"
     elif command -v pacman &>/dev/null; then
         PKG_INSTALL="sudo pacman -S --noconfirm"
         UPDATE_CMD="sudo pacman -Syu"

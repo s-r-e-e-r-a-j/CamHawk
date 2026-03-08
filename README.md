@@ -3,7 +3,7 @@ Advanced Camera Phishing Tool
 
 CamHawk is a camera phishing tool that tricks users into granting webcam access. Once permission is granted, the tool captures images from the webcam and sends them to your machine.
 
-CamHawk uses **JavaScript** for the server-side functionality and **Bash scripting** for automation. It also supports multiple tunneling options for port forwarding, allowing remote access during testing.
+CamHawk uses **JavaScript** for the server-side functionality and **Bash scripting** for automation. It also supports multiple tunneling options for port forwarding.
 
 ## Security Research & Educational Purpose
 

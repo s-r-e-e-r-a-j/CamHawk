@@ -31,7 +31,7 @@ If you do not agree with these terms, **do not use this software**.
 
 - **Real-time Photo Capture** – Instantly saves images as soon as the target grants access.
 
-- **Multiple Port Forwarding Options** – Choose between Serveo.net, Cloudflared, or Localhost for manual/external tunneling.
+- **Multiple Port Forwarding Options** – Choose between `Serveo.net`, `Cloudflared`, or `Localhost` for manual/external tunneling.
 
 - **Live Terminal Updates** – Displays "Photo Received!" along with the target’s IP address when an image is captured.
 

@@ -31,7 +31,7 @@ If you do not agree with these terms, **do not use this software**.
 
 - **Real-time Photo Capture** – Instantly saves images as soon as the target grants access.
 
-- **Multiple Port Forwarding Options** – Choose between Serveo.net and Cloudflared for tunneling.
+- **Multiple Port Forwarding Options** – Choose between Serveo.net, Cloudflared, or Localhost for manual/external tunneling.
 
 - **Live Terminal Updates** – Displays "Photo Received!" along with the target’s IP address when an image is captured.
 
@@ -51,9 +51,11 @@ If you do not agree with these terms, **do not use this software**.
 - **Node.js and expressjs** ( In linux distributions like `Debian`,`RHEL`, `Arch` it automatically install `nodejs` and `expressjs` if it is not installed)
 - **Port Forwarding Options:**
 
-   - **Serveo.net** – Used           as the default                option for tunneling
-  
-   - **Cloudflared** –               Available as an               alternative for               port forwarding and           is automatically              installed if missing.
+  - **Serveo.net** – Used as the default option for tunneling.
+
+  - **Cloudflared** – Available as an alternative for port forwarding and automatically installed if missing.
+
+  - **Localhost Mode** – Runs the server locally and displays the running port, allowing users to use their own VPS or external tunneling services (e.g., Ngrok, SSH tunnels, etc.).
   
 **Steps to Install:**
 1. **Clone the repository**
@@ -88,7 +90,7 @@ chmod +x camhawk.sh
 
 2. **Choose a custom HTML page** – Optionally, provide your own phishing page with internal JavaScript and CSS support for a fully customized experience. Or, skip this step to use the default page.
 
-3. **Choose a port forwarding method** – Select between `Serveo.net` or `Cloudflared` for tunneling.
+3. **Choose a port forwarding method** – Select between `Serveo.net`, `Cloudflared`, or `Localhost` mode for manual/external tunneling.
 
 4. **Share the generated link with the target**.
 

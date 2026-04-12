@@ -85,9 +85,28 @@ install_dependencies() {
     }
 
     if ! command -v cloudflared &>/dev/null; then
-        echo -e "${RED}[-] Cloudflared is not installed! Installing...${RESET}"
-        sudo wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O /usr/local/bin/cloudflared
-        sudo chmod +x /usr/local/bin/cloudflared
+          echo -e "${RED}[-] Cloudflared is not installed! Installing...${RESET}"
+
+          ARCH=$(uname -m)
+
+          case "$ARCH" in
+              x86_64)
+               URL="https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64"
+               ;;
+              aarch64|arm64)
+               URL="https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64"
+               ;;
+              armv7l|armv6l|armv8l)
+               URL="https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm"
+               ;;
+              *)
+               echo -e "${RED}[-] Unsupported architecture: $ARCH${RESET}"
+               exit 1
+               ;;
+          esac
+
+          sudo wget -q "$URL" -O /usr/local/bin/cloudflared
+          sudo chmod +x /usr/local/bin/cloudflared
     fi
 
     echo -e "${GREEN}[+] All dependencies are installed!${RESET}"
